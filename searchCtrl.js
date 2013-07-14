@@ -16,7 +16,7 @@ bbfcapp.controller('SearchCtrl', ['$scope', 'angularFire',
       $scope.doSearch = function() {
         $scope.results = []
         for (var word in $scope.words) {
-          if (word.indexOf($scope.term) == 0) {
+          if (word.indexOf($scope.term.toLowerCase()) == 0) {
             for (var f in $scope.words[word].releases) {
               $scope.results.push($scope.words[word].releases[f]);
             }
