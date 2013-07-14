@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" ng-app="bbfc">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>BBFC Search</title>
+		<style>[ng-cloak] {display: none}</style>
+	</head>
+	<body>
+		<section id="bbfcapp" ng-controller="SearchCtrl">
+			<header id="header">
+				<h1>BBFC Insight Search</h1>
+				<form>
+					<input placeholder="Search term" ng-model="term" ng-change='doSearch()' autofocus>
+				</form>
+				<h2>{{results.length}} matches</h2>
+			</header>
+
+			<ul>
+  				<li ng-repeat="film in results">{{film.name}}: {{film.insight}}</li>
+			</ul>
+		</section>
+		<script src="./angular.js"></script>
+		<script src="https://cdn.firebase.com/v0/firebase.js"></script>
+		<script src="./angularFire.js"></script>
+		<script src="./app.js"></script>
+		<script src="./searchCtrl.js"></script>
+	</body>
+</html>

@@ -34,14 +34,22 @@ scrape = (cb) ->
 
 process = (body) ->
    
-  insights = []
+  results = []
   $ = cheerio.load body
-  strong = $('.recent-decision p strong').filter (i,e) ->
-    $(e).text() is "BBFC Insight"
-  strong.each (i,e) ->
-    insight = $(e).parent().text().replace /^.*\- /g, ''
-    insights.push insight
+  decisions = $('.recent-decision')
 
-  return insights
+  decisions.each (i,e) ->
+    title = $('h3', $(e)).text()
+    id = $('h3 a', $(e)).attr('href')
+    insights = $('p strong', $(e)).filter (i2,e2) ->
+      $(e2).text() is "BBFC Insight"
+    insights.each (i,e) ->
+      insight = $(e).parent().text().replace /^.*\- /g, ''
+      result =
+        id: id
+        title: title
+        insight: insight
+      results.push result
+  return results
 
 module.exports = {scrape}
